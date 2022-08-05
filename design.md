@@ -6,8 +6,6 @@ Simple window, document as input. The window should auto update when the documen
 
 Syntax? Perhaps just simple python with some custom classes and a predefined control flow or context.
 
-This would be the best option, to be like desmos however we need to modify things a little bit.
-
 - Predefine the initial scale for the grid, and draw it first.
 - Create a number of simple methods for creating functions.
 - Allow the viewport to be panned, zoomed, asymmetric scales, reset.
@@ -20,3 +18,9 @@ For each frame:
 Check the current input file to see if it was changed. Verify that it parses without any issues. Once it has run, take the objects defined and add them to the list of drawing objects. Additionally allow for variables with control handles or sliders.
 
 Decide on the grid spacing to draw given the viewport zoom level (Consider the two axes separately). Draw the grid, given the current viewport. Draw each of the render objects in the order they were defined. 
+
+
+
+**Context:** store the data about the current scene. The file we are tracking, the zoom, the pan, the object list.
+
+Create a simple SFML window. Keep it in the context, update the viewport as needed when the user changes it.
