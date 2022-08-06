@@ -57,6 +57,72 @@ namespace iplot {
 		msprite.setTextureRect(sf::IntRect(0, 0, mviewport.x, mviewport.y));
 	}
 
+	void Renderer::drawGrid(BLContext& ctx, const Document& doc, const GridHighlights& hl) {
+		if (mviewport.x == 0 || mviewport.y == 0) {
+			return;
+		}
+
+		struct GDelta {
+			double delta;
+			int count;
+		};
+
+		auto calcDelta = [](double zoom) -> GDelta {
+			const double ln10 = 2.30258509299;
+
+			double base = std::log10(zoom);
+			double factor = std::floor(base);
+			double fract = base - factor;
+			double mult = std::exp(factor * ln10);
+
+			const double p1 = 0.176091259056;
+			const double p2 = 0.54406804435;
+			const double p3 = 0.875061263392;
+
+			if (fract < p1) {
+				// 0.2
+				return { mult * 0.2, 4 };
+			}
+			else if (fract < p2) {
+				// 0.5
+				return { mult * 0.5, 5 };
+			}
+			else if (fract < p3) {
+				// 1
+				return { mult, 5 };
+			}
+			else {
+				// 2
+				return { mult * 2.0, 4 };
+			}
+		};
+
+		GDelta xdelta, ydelta;
+		xdelta = calcDelta(doc.zoom.x);
+		ydelta = calcDelta(doc.zoom.y);
+
+		vec2 origin = -doc.pan;
+
+		// Draw the center lines if the origin x or y is within the render region
+		if (std::abs(origin.x) < doc.zoom.x) {
+
+		}
+		if (std::abs(origin.y) < doc.zoom.y) {
+
+		}
+
+		// Draw the subgrid first
+		// Calculate where the first line will go, then draw all the middle lines one by one. 
+		
+
+		// Draw the primary grid
+
+
+		
+		BLPath path;
+
+	}
+
 	void Renderer::testDraw(sf::RenderWindow& window) {
 		// Early return, no render needed.
 		if (mviewport.x == 0 || mviewport.y == 0) {

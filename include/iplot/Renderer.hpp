@@ -1,14 +1,27 @@
 #pragma once
 #include <memory>
 #include <iplot/Types.hpp>
+#include <iplot/Document.hpp>
+
+#include <ez/BitFlags.hpp>
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-
+class BLContext;
 
 namespace iplot {
+	enum class GridHighlight {
+		Horizontal = 0,
+		Vertical = 1,
+		_None = 0,
+		_All = 3,
+		_Count = 2,
+		_EnableOperators
+	};
+	using GridHighlights = ez::BitFlags<GridHighlight>;
+
 	class Renderer {
 	public:
 		Renderer();
@@ -18,6 +31,7 @@ namespace iplot {
 		ivec2 getViewport();
 		void setViewport(const ivec2 & _view);
 
+		void drawGrid(BLContext & ctx, const Document& doc, const GridHighlights & hl);
 		void testDraw(sf::RenderWindow & window);
 	private:
 		// The current viewport, and the reserved texture memory.

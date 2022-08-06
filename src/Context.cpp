@@ -13,8 +13,10 @@
 
 namespace iplot {
 	Context::Context(int w, int h) 
-		: mzoom(1.f, 1.f)
-		, mpan(0.f, 0.f)
+        : mdoc{
+            vec2(1.f, 1.f),
+            vec2(0.f, 0.f)
+          }
 		, mviewport(w, h)
 	{
 		// Filepath needs to be initialized by the user in some way.

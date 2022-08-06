@@ -11,6 +11,7 @@ find_package(GLEW REQUIRED)
 
 find_package(blend2d CONFIG REQUIRED)
 
+find_package(ez-bitflags CONFIG REQUIRED)
 find_package(ez-math CONFIG REQUIRED)
 find_package(ez-geo CONFIG REQUIRED)
 
@@ -35,6 +36,7 @@ target_link_libraries(iplot PUBLIC
 
 	ez::math
 	ez::geo
+	ez::bitflags
 )
 
 add_executable(test_exe
